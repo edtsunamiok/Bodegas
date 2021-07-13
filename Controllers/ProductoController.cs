@@ -56,17 +56,34 @@ namespace Bodegas.Controllers
         }
 
 
-        //// GET: HomeController1
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        // GET: HomeController1/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public async Task<IActionResult> EliminarProducto(int id)
         {
-            return View();
+            await Db.Connection.OpenAsync();
+            var query = new ProdutoQuery(Db);
+            var result = await query.FindOneAsync(id);
+            if (result is null)
+                return new NotFoundResult();
+            return View(result);
+            //return new OkObjectResult(result);
         }
+
+        [HttpPost, ActionName("EliminarProducto")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EliminarConfirmacion(int id)
+        {
+            await Db.Connection.OpenAsync();
+            var query = new ProdutoQuery(Db);
+            var result = await query.FindOneAsync(id);
+            if (result is null)
+                return new NotFoundResult();
+            await result.DeleteAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+       
 
         // GET: HomeController1/Create
         public ActionResult Create()
@@ -77,17 +94,27 @@ namespace Bodegas.Controllers
         // POST: HomeController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(Producto collection)
         {
             try
             {
+                await Db.Connection.OpenAsync();
+                collection.Db = Db;
+               
+                await collection.InsertAsync();
                 return RedirectToAction(nameof(Index));
+                // return new OkObjectResult(collection);
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
+
+        
+
+       
+
 
         //// GET: HomeController1/Edit/5
         //public ActionResult Edit(int id)

@@ -1,30 +1,30 @@
 ﻿@model Bodegas.Models.Producto
 
 @{
-    ViewData["Title"] = "Editar Producto";
+    ViewData["Title"] = "Crear Producto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Editar Producto</h1>
+<h1>Nuevo</h1>
 
-<h4>Producto a modificar</h4>
+<h4>Producto</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action ="EditarProducto" >
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Create">
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id_Producto" class="control-label">ID</label>
+                <label asp-for="Id_Producto" class="control-label"></label>
                 <input asp-for="Id_Producto" class="form-control" />
                 <span asp-validation-for="Id_Producto" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
-                <label asp-for="Producto_" class="control-label">PRODUCTO</label>
+                <label asp-for="Producto_" class="control-label"></label>
                 <input asp-for="Producto_" class="form-control" />
                 <span asp-validation-for="Producto_" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Aplicar" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
