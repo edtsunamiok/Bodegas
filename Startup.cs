@@ -13,6 +13,7 @@ namespace Bodegas
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,6 +25,7 @@ namespace Bodegas
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:DefaultConnection"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +54,7 @@ namespace Bodegas
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }
