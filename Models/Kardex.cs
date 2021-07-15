@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,8 +20,10 @@ namespace Bodegas.Models
         [Display(Name = "CANTIDAD")]
         public int Cantidad { get; set; }
         [Display(Name = "PRECIO")]
+        [DisplayFormat(DataFormatString = "{0:C4}", ApplyFormatInEditMode = true)]
         public decimal Precio { get; set; }
         [Display(Name = "TOTAL")]
+        [DisplayFormat(DataFormatString = "{0:C4}", ApplyFormatInEditMode = true)]
         public decimal Total { get; set; }
         public int id_producto { get; set; }
 

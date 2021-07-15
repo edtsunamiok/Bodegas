@@ -13,7 +13,7 @@
 <table class="table table-responsive table-striped ">
     <thead>
         <tr>
-            <th>
+            <th hidden ="hidden">
                 ID @* @Html.DisplayNameFor(model => model.Id_Producto)*@
             </th>
             <th>
@@ -31,7 +31,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td >
+            <td hidden ="hidden">
                 @Html.DisplayFor(modelItem => item.Id_Producto)
             </td>
             <td>
