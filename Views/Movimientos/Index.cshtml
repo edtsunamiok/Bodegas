@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Bodegas.Models.MovimientosModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Nuevo Movimiento</a>
+</p>
+<h3>Buscar Movimiento</h3>
+
+<input class="form-control col-4" id="myInput" type="text" placeholder="Search..">
+<br>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th hidden="hidden">
+                    @Html.DisplayNameFor(model => model.id_movimiento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fecha)
+                </th>
+                <th>
+                    # @*Html.DisplayNameFor(model => model.NumeroPedido)*@
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Concepto)
+                </th>
+                <th hidden="hidden">
+                    @Html.DisplayNameFor(model => model.id_movimientoDetalle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreMovimiento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estatus)
+                </th>
+
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td hidden="hidden">
+                        @Html.DisplayFor(modelItem => item.id_movimiento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroPedido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Concepto)
+                    </td>
+                    <td hidden="hidden">
+                        @Html.DisplayFor(modelItem => item.id_movimientoDetalle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreMovimiento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estatus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Ver Detalle", "DetalleMovimiento", new { id = item.id_movimiento }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Cancelar", "Delete", new { id = item.id_movimiento }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

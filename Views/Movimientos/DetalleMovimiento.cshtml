@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Bodegas.Models.MovimientosModel>
+
+@{
+    ViewData["Title"] = "DetalleMovimiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detalle Movimiento</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label"> Fecha</label>
+                <input class="form-control" id="disabledInput" type="text" placeholder=" @ViewBag.fecha" disabled>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Numero Pedido</label>
+                <input class="form-control" id="disabledInput" type="text" placeholder=" @ViewBag.NumeroPedido" disabled>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Concepto</label>
+                <input class="form-control" id="disabledInput" type="text" placeholder=" @ViewBag.Concepto" disabled>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Estatus</label>
+                <input class="form-control" id="disabledInput" type="text" placeholder=" @ViewBag.Estatus" disabled>
+
+            </div>
+        </form>
+    </div>
+</div>
+<h4>Detalle</h4>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id_producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id_TipoMovimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreMovimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_producto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_TipoMovimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreMovimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estatus)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
