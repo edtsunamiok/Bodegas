@@ -6,6 +6,13 @@
     <title>@ViewData["Title"] - Bodegas</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
     <header>
@@ -16,7 +23,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Movimientos kardex</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Kardex" asp-action="Index">kardex Existencias</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -48,6 +55,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/datatables.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/jquery.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

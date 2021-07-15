@@ -22,7 +22,7 @@ namespace Bodegas.Models
         public async Task<Producto> FindOneAsync(int id)
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT `id_Producto`, `Producto` FROM `Producto` WHERE `id_Producto` = @id";
+            cmd.CommandText = @"SELECT `id_Producto`,`Codigo` ,`Producto`, `Activo` FROM `Producto` WHERE `id_Producto` = @id";
             cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@id",
@@ -36,7 +36,7 @@ namespace Bodegas.Models
         public async Task<List<Producto>> LatestPostsAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT `id_Producto`, `Producto` FROM `Producto` ORDER BY `id_Producto` asc LIMIT 100;";
+            cmd.CommandText = @"SELECT `id_Producto`,`Codigo` ,`Producto`, `Activo` FROM `Producto` ORDER BY `id_Producto` asc LIMIT 100;";
             return await ReadAllAsync(await cmd.ExecuteReaderAsync());
         }
 
@@ -59,7 +59,9 @@ namespace Bodegas.Models
                     var post = new Producto(Db)
                     {
                         Id_Producto = reader.GetInt32(0),
-                        Producto_ = reader.GetString(1),
+                        Codigo = reader.GetString(1),
+                        Producto_ = reader.GetString(2),
+                        Activo = reader.GetBoolean(3)
                     };
                     posts.Add(post);
                 }

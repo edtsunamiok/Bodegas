@@ -10,30 +10,42 @@
 <p>
     <a asp-action="Create">Crear nuevo producto</a>
 </p>
-<table class="table">
+<table class="table table-responsive table-striped ">
     <thead>
         <tr>
             <th>
                 ID @* @Html.DisplayNameFor(model => model.Id_Producto)*@
             </th>
             <th>
-               PRODUCTO @*@Html.DisplayNameFor(model => model.Producto_)*@
+                CODIGO @* @Html.DisplayNameFor(model => model.Id_Producto)*@
             </th>
-            <th></th>
+            <th>
+                PRODUCTO @*@Html.DisplayNameFor(model => model.Producto_)*@
+            </th>
+            <th>
+                ESTADO @*@Html.DisplayNameFor(model => model.Producto_)*@
+            </th>
+            <th>ACCION</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td >
                 @Html.DisplayFor(modelItem => item.Id_Producto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Producto_)
             </td>
             <td>
-                @Html.ActionLink("Editar", "EditarProducto", new {  id=item.Id_Producto  }) |
-                @Html.ActionLink("Eliminar", "EliminarProducto", new { id = item.Id_Producto })
+                @Html.DisplayFor(modelItem => item.Activo , new  { @class = "form-check" })
+            </td>
+            <td >
+                @Html.ActionLink("Editar", "EditarProducto", new { id = item.Id_Producto   }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Eliminar", "EliminarProducto", new { id = item.Id_Producto }, new { @class = "btn btn-danger" })
             </td>
         </tr>
 }

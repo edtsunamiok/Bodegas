@@ -7,21 +7,35 @@
 
 <h1>Eliminar Producto</h1>
 
-<div>
+
+
+<div class="container">
     <h4>Producto</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 ">
             ID
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-10 active">
             @Html.DisplayFor(model => model.Id_Producto)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 ">
+            CODIGO
+        </dt>
+        <dd class="col-sm-10 ">
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt class="col-sm-2 ">
             PRODUCTO
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-10 ">
             @Html.DisplayFor(model => model.Producto_)
+        </dd>
+        <dt class="col-sm-2 ">
+            ACTIVO
+        </dt>
+        <dd class="col-sm-10 ">
+            @Html.DisplayFor(model => model.Activo)
         </dd>
     </dl>
 
@@ -30,7 +44,7 @@
 @using (Html.BeginForm())
 {
     <p>
-        <input type="submit" value="Eliminar" class="btn btn-primary" /> |
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
       
     </p>
 }

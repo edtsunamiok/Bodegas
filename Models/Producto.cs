@@ -11,6 +11,8 @@ namespace Bodegas.Models
     {
         public int Id_Producto { get; set; }
         public string Producto_ { get; set; }
+        public string Codigo { get; set; }
+        public bool Activo { get; set; }
 
         internal AppDb Db { get; set; }
 
@@ -23,8 +25,9 @@ namespace Bodegas.Models
         public async Task InsertAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"INSERT INTO `Producto` (`Producto`) VALUES (@Producto);";
+            cmd.CommandText = @"call add_Nuevoproducto(@Producto,@Activo);"; //@"INSERT INTO `Producto` (`Producto`) VALUES (@Producto);";
             SendParamsProducto(cmd);
+
             await cmd.ExecuteNonQueryAsync();
             Id_Producto = (int)cmd.LastInsertedId;
         }
@@ -55,8 +58,14 @@ namespace Bodegas.Models
                 DbType = DbType.String,
                 Value = Producto_,
             });
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@Activo",
+                DbType = DbType.Boolean,
+                Value = Producto_,
+            });
         }
-
+        
         private void SendId(MySqlCommand cmd)
         {
             cmd.Parameters.Add(new MySqlParameter
