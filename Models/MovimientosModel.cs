@@ -11,7 +11,9 @@ namespace Bodegas.Models
     public class MovimientosModel
     {
         public int id_movimiento { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        //[DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "FECHA")]
         public DateTime fecha { get; set; }
         [Display(Name = "NUMERO MOVIMIENTO")]
@@ -22,8 +24,10 @@ namespace Bodegas.Models
         [Display(Name = "CANTIDAD")]
         public int Cantidad { get; set; }
         [Display(Name = "PRECIO")]
+        [DisplayFormat(DataFormatString = "{0:C4}", ApplyFormatInEditMode = true)]
         public decimal Precio { get; set; }
         [Display(Name = "TOTAL")]
+        [DisplayFormat(DataFormatString = "{0:C4}", ApplyFormatInEditMode = true)]
         public decimal total { get; set; }
         public int id_producto { get; set; }
         [Display(Name = "CODIGO PRODUCTO")]

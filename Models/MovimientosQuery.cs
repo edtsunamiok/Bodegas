@@ -62,6 +62,20 @@ namespace Bodegas.Models
             return result.Count > 0 ? result : null;
         }
 
+        public async Task<MovimientosModel> FindMovOneAsync(int id)
+        {
+            using var cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"call con_OneMovimiento(@id) ";// SELECT `id_Producto`,`Codigo` ,`Producto`, `Activo` FROM `Producto` WHERE `id_Producto` = @id";
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@id",
+                DbType = DbType.Int32,
+                Value = id,
+            });
+            var result = await ReadAllDetalisAsync(await cmd.ExecuteReaderAsync());
+            return result.Count > 0 ? result[0] : null;
+        }
+
 
         private async Task<List<MovimientosModel>> ReadAllDetalisAsync(DbDataReader reader)
         {

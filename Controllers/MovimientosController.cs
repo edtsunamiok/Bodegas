@@ -39,12 +39,46 @@ namespace Bodegas.Controllers
                 return new NotFoundResult();
 
             var r = result.First();// OrderBy(x => x.id_movimiento).Skip(1).Take(1).ToList();
-            ViewData["fecha"] = r.fecha.ToShortTimeString();
+            ViewData["fecha"] = r.fecha.ToShortDateString();
             ViewData["NumeroPedido"] = r.NumeroPedido.ToString();
             ViewData["Concepto"] = r.Concepto.ToString();
             ViewData["Estatus"] = r.Estatus.ToString();
+            ViewData["id_movimiento"] = r.id_movimiento.ToString();
             return View(result);
             //return new OkObjectResult(result);
+        }
+
+
+        [HttpPost, ActionName("DetalleMovimiento")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CancelarMovimento (int id, MovimientosModel collection)
+        {
+            await Db.Connection.OpenAsync();
+            collection.Db = Db;
+            var query = new MovimientosQuery(Db);
+            var result = await query.FindMovOneAsync(id);
+
+            if (result is null)
+                return new NotFoundResult();
+
+            result.id_movimiento = collection.id_movimiento;
+            result.id_TipoMovimiento = collection.id_TipoMovimiento;
+
+            if (result.id_TipoMovimiento != 3)
+            {
+                
+               
+                //await result.UpdatekardexAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+
+                ViewBag.mensaje = "Movimiento ya fue cancelado!!...";
+                return View();
+                
+            }
+           
         }
 
 
