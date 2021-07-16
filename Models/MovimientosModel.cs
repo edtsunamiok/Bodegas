@@ -49,6 +49,86 @@ namespace Bodegas.Models
         }
 
 
-       
+        public async Task Update_m_movimientoAsync()
+        {
+            using var cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"call upd_m_movimiento(@id_movimiento)";// UPDATE `Producto` SET `Producto` = @Producto WHERE `id_Producto` = @id;";
+            
+            SendId(cmd);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task InsertAsync()
+        {
+            using var cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"call add_NuevoMovimientoE_S(@id_Producto_ ,@id_Tipomovimiento_,@Concepto_,@Cantidad_,@Precio_);"; //@"INSERT INTO `Producto` (`Producto`) VALUES (@Producto);";
+            SendParamsInsert(cmd);
+
+                await cmd.ExecuteNonQueryAsync();
+            id_producto = (int)cmd.LastInsertedId;
+        }
+
+        private void SendParamsInsert(MySql.Data.MySqlClient.MySqlCommand cmd)
+        {
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@id_Producto_",
+                DbType = DbType.Int32,
+                Value = id_producto
+            });
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@id_Tipomovimiento_",
+                DbType = DbType.Int32,
+                Value = id_TipoMovimiento
+            });
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@Concepto_",
+                DbType = DbType.String,
+                Value = Concepto
+            });
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@Cantidad_",
+                DbType = DbType.Int32,
+                Value = Cantidad
+            });
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@Precio_",
+                DbType = DbType.Decimal,
+                Value = Precio
+            });
+        }
+            //public async Task Update_d_movimientoAsync()
+            //{
+            //    using var cmd = Db.Connection.CreateCommand();
+            //    cmd.CommandText = @"call add_existenciasKardex(@id_movimiento,@Cantidad,@Precio,@id_producto_)";// UPDATE `Producto` SET `Producto` = @Producto WHERE `id_Producto` = @id;";
+            //    SendParams_d_movimiento(cmd);
+            //    SendId(cmd);
+            //    await cmd.ExecuteNonQueryAsync();
+            //}
+
+
+
+
+            //    cmd.Parameters.Add(new MySqlParameter
+            //    {
+            //        ParameterName = "@id_producto_",
+            //        DbType = DbType.Decimal,
+            //        Value = id_producto
+            //    });
+            //}
+
+            private void SendId(MySqlCommand cmd)
+        {
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@id_movimiento",
+                DbType = DbType.Int32,
+                Value = id_movimiento
+            });
+        }
     }
 }

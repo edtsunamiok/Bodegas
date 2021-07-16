@@ -10,7 +10,7 @@
 <p>
     <a asp-action="Create">Nuevo Movimiento</a>
 </p>
-<h3>Buscar C</h3>
+<h3>Buscar Movimiento</h3>
 
 <input class="form-control col-4" id="myInput" type="text" placeholder="Search..">
 <br>
@@ -70,7 +70,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("Ver Detalle", "DetalleMovimiento", new { id = item.id_movimiento }, new { @class = "btn btn-primary" }) |
-                        @Html.ActionLink("Cancelar", "Delete", new { id = item.id_movimiento }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Cancelar", "DetalleMovimiento", new { id = item.id_movimiento }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }

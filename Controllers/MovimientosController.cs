@@ -1,8 +1,10 @@
 ﻿using Bodegas.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,23 +63,14 @@ namespace Bodegas.Controllers
             if (result is null)
                 return new NotFoundResult();
 
-            result.id_movimiento = collection.id_movimiento;
-            result.id_TipoMovimiento = collection.id_TipoMovimiento;
+            //result.id_movimiento = collection.id_movimiento;
+            //result.id_TipoMovimiento = collection.id_TipoMovimiento;
 
-            if (result.id_TipoMovimiento != 3)
-            {
-                
-               
-                //await result.UpdatekardexAsync();
+               await result.Update_m_movimientoAsync();      
+                 
+
                 return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-
-                ViewBag.mensaje = "Movimiento ya fue cancelado!!...";
-                return View();
-                
-            }
+          
            
         }
 
@@ -85,30 +78,42 @@ namespace Bodegas.Controllers
 
 
 
-        // GET: MovimientosController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        
 
         // GET: MovimientosController/Create
-        public ActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            await Db.Connection.OpenAsync();
+            var query = new MovimientosQuery(Db);
+            var result = await query.allProductosExistenciasAsync();
+            ViewBag.Producto = new SelectList(result, "id_producto","Codigo");
+
+            var query2 = new MovimientosQuery(Db);
+            var result2 = await query2.allTipoMovimientoAsync();
+            ViewBag.Tipo = new SelectList(result2, "id_TipoMovimiento", "NombreMovimiento");
+
             return View();
         }
 
         // POST: MovimientosController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(string Tipo, string Producto, MovimientosModel collection)
         {
             try
             {
+                await Db.Connection.OpenAsync();
+                collection.Db = Db;
+
+                collection.id_producto = int.Parse(Producto.ToString());
+                collection.id_TipoMovimiento = int.Parse(Tipo.ToString());
+                await collection.InsertAsync();
                 return RedirectToAction(nameof(Index));
+                // return new OkObjectResult(collection);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 

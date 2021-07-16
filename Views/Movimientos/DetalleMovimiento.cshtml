@@ -46,19 +46,24 @@
         </form>
         @using (Html.BeginForm())
         {
+            ViewBag.mensaje = "Movimiento ya fue cancelado!!...";
             if (ViewBag.Estatus != "Procesado")
             {
+
                 <p>
                     <input type="submit" value="Cancelar Movimiento" disabled="disabled" class="btn btn-danger" />
 
                 </p>
+
+                <p class="text-center bg-warning">@ViewBag.Mensaje</p>
             }
             else
             {
-                <p>
-                    <input type="submit" value="Cancelar Movimiento"  class="btn btn-danger" />
 
+                <p>
+                    <input type="submit" value="Cancelar Movimiento" class="btn btn-danger" />
                 </p>
+
             }
         }
     </div>
