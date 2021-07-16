@@ -21,3 +21,8 @@ database=bodega
 
 No editar este archivo.
 Ejecutar los scripts SQL en el servidor MySQL del host, tal como esta creado el archivo, sin cambiarle el orden. 
+
+![image](https://user-images.githubusercontent.com/24233265/126014005-aec66b35-966d-46a4-ab45-d0f59631f617.png)
+![image](https://user-images.githubusercontent.com/24233265/126014047-fd87abf0-7136-41e4-9941-ea1882929a34.png)
+![image](https://user-images.githubusercontent.com/24233265/126014056-853f8296-6d91-4012-ab52-d26c28fc56f5.png)
+![image](https://user-images.githubusercontent.com/24233265/126014108-e4fe3740-05f2-4128-b9ac-8c944f712a3b.png)
