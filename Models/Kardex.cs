@@ -38,7 +38,7 @@ namespace Bodegas.Models
         public async Task UpdatekardexAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"call add_existenciasKardex(@id_Kardex,@Cantidad,@Precio,@id_producto_)";// UPDATE `Producto` SET `Producto` = @Producto WHERE `id_Producto` = @id;";
+            cmd.CommandText = @"call add_existenciasKardex(@id_Kardex,@Cantidad,@Precio,@id_producto_)";
             SendParamsKardex(cmd);
             SendId(cmd);
             await cmd.ExecuteNonQueryAsync();

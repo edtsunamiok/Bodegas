@@ -40,7 +40,7 @@ namespace Bodegas.Controllers
             if (result is null)
                 return new NotFoundResult();
 
-            var r = result.First();// OrderBy(x => x.id_movimiento).Skip(1).Take(1).ToList();
+            var r = result.First();
             ViewData["fecha"] = r.fecha.ToShortDateString();
             ViewData["NumeroPedido"] = r.NumeroPedido.ToString();
             ViewData["Concepto"] = r.Concepto.ToString();

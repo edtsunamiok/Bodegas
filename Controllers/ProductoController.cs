@@ -49,7 +49,7 @@ namespace Bodegas.Controllers
             var result = await query.FindOneAsync(id);
             if (result is null)
                 return new NotFoundResult();
-            result.Producto_ = collection.Producto_;// body.Producto_;
+            result.Producto_ = collection.Producto_;
             await result.UpdateAsync();
             return RedirectToAction(nameof(Index));
            // return new OkObjectResult(result);

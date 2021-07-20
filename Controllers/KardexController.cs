@@ -24,8 +24,9 @@ namespace Bodegas.Controllers
             await Db.Connection.OpenAsync();
             var query = new KardexQuery(Db);
             var result = await query.allKardexAsync();
+            
             return View(result);
-            // return new OkObjectResult(result);
+             //return new OkObjectResult(result);
         }
 
         [HttpGet]

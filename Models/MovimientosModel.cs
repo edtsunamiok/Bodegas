@@ -52,7 +52,7 @@ namespace Bodegas.Models
         public async Task Update_m_movimientoAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"call upd_m_movimiento(@id_movimiento)";// UPDATE `Producto` SET `Producto` = @Producto WHERE `id_Producto` = @id;";
+            cmd.CommandText = @"call upd_m_movimiento(@id_movimiento)";
             
             SendId(cmd);
             await cmd.ExecuteNonQueryAsync();
@@ -61,7 +61,7 @@ namespace Bodegas.Models
         public async Task InsertAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"call add_NuevoMovimientoE_S(@id_Producto_ ,@id_Tipomovimiento_,@Concepto_,@Cantidad_,@Precio_);"; //@"INSERT INTO `Producto` (`Producto`) VALUES (@Producto);";
+            cmd.CommandText = @"call add_NuevoMovimientoE_S(@id_Producto_ ,@id_Tipomovimiento_,@Concepto_,@Cantidad_,@Precio_);"; 
             SendParamsInsert(cmd);
 
                 await cmd.ExecuteNonQueryAsync();

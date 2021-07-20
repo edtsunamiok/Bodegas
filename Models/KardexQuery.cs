@@ -23,8 +23,8 @@ namespace Bodegas.Models
         public async Task<List<Kardex>> allKardexAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"call allKardex";// SELECT k.id_Kardex , p.Codigo, p.Producto, k.Cantidad, k.Precio,  k.Cantidad* k.Precio as Total, k.id_producto FROM `kardex` as k inner join  producto as p on k.Id_Producto = p.id_producto order by p.Codigo;";
-            return await ReadAllAsync(await cmd.ExecuteReaderAsync());
+            cmd.CommandText = @"call allKardex";
+                return await ReadAllAsync(await cmd.ExecuteReaderAsync());
         }
 
         private async Task<List<Kardex>> ReadAllAsync(DbDataReader reader)
@@ -53,7 +53,7 @@ namespace Bodegas.Models
         public async Task<Kardex> FindOneAsync(int id)
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"call con_OneKardex(@id) ";// SELECT `id_Producto`,`Codigo` ,`Producto`, `Activo` FROM `Producto` WHERE `id_Producto` = @id";
+            cmd.CommandText = @"call con_OneKardex(@id) ";
             cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@id",

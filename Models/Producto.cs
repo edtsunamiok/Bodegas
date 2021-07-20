@@ -25,7 +25,7 @@ namespace Bodegas.Models
         public async Task InsertAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"call add_Nuevoproducto(@Producto,@Activo);"; //@"INSERT INTO `Producto` (`Producto`) VALUES (@Producto);";
+            cmd.CommandText = @"call add_Nuevoproducto(@Producto,@Activo);";
             SendParamsProducto(cmd);
 
             await cmd.ExecuteNonQueryAsync();

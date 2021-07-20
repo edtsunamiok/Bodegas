@@ -21,7 +21,7 @@ namespace Bodegas.Models
         public async Task<List<MovimientosModel>> allMovimientosAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"call con_allMovimientos";// SELECT k.id_Kardex , p.Codigo, p.Producto, k.Cantidad, k.Precio,  k.Cantidad* k.Precio as Total, k.id_producto FROM `kardex` as k inner join  producto as p on k.Id_Producto = p.id_producto order by p.Codigo;";
+            cmd.CommandText = @"call con_allMovimientos";
             return await ReadAllAsync(await cmd.ExecuteReaderAsync());
         }
 
@@ -107,7 +107,7 @@ namespace Bodegas.Models
         public async Task<List<MovimientosModel>> FindOneAsync(int id)
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"call con_OneMovimiento(@id) ";// SELECT `id_Producto`,`Codigo` ,`Producto`, `Activo` FROM `Producto` WHERE `id_Producto` = @id";
+            cmd.CommandText = @"call con_OneMovimiento(@id) ";
             cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@id",
@@ -121,7 +121,7 @@ namespace Bodegas.Models
         public async Task<MovimientosModel> FindMovOneAsync(int id)
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"call con_OneMovimiento(@id) ";// SELECT `id_Producto`,`Codigo` ,`Producto`, `Activo` FROM `Producto` WHERE `id_Producto` = @id";
+            cmd.CommandText = @"call con_OneMovimiento(@id) ";
             cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@id",
